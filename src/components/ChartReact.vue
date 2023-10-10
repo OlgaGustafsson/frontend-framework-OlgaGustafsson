@@ -122,6 +122,7 @@ export default {
     // Skapa en ny div-element för varje cell
     const cell = document.createElement('div');
     cell.setAttribute('data-cy', 'chart-circle'); // sätt önskat värde här
+   
 
 
       ctx.beginPath();

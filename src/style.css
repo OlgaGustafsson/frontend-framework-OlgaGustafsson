@@ -123,7 +123,7 @@ button:focus-visible {
 
 .button-link:focus {
   /* outline: 2px solid #4861ec;  */
-  background-color: rgb(38, 37, 37);;
+  background-color: rgb(38, 37, 37);
 }
 
 /* 
@@ -139,3 +139,5 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 } */
+
+
