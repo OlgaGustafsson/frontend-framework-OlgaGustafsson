@@ -39,9 +39,8 @@
 </style>-->
 
 
-
-
 <template>
+
   <div class="container" data-cy="chart">
     <div class="years">
       <div v-for="(year, index) in years" :key="index" data-cy="chart-header-cell">{{ year }}</div>
@@ -55,45 +54,33 @@
         >
         
         <div class="ring-row">
-        <div class="framework-name">{{ framework.name }}</div>
+          <div data-cy="chart-data-cell">{{ framework.name }}</div>
 
           <div data-cy="chart-data-cell"
-            v-for="(survey, index) in framework.surveys"
+            v-for="(survey, index) in framework.surveys || (survey, year) in years"
             :key="index"
             class="ring-circle"
             :style="{ backgroundColor: black, borderColor: framework.color }"
-          >
-          <div v-if="framework.name === 'React' && index === 0">React</div>
+          > {{ year }}
 
-          <div v-else-if="framework.name === 'Vue' && index === 0"
-            data-cy="chart-circle"
-            :style="{ color: '#4861ec' }"
-           >93%</div>
-
-           <div v-else-if="framework.name === 'Vue' && index === 1"
-            data-cy="chart-circle"
-            :style="{ color: '#47cfed' }"
-           >React</div>
-
-           <div v-else-if="framework.name === 'Vue' && index === 2"
-            data-cy="chart-circle"
-            :style="{ color: '#47cfed' }"
-           >Vue</div>
-
-          <div v-else data-cy="chart-circle" 
-            class="chart-circle"
-            :style="{ color: framework.color }"
-            >{{ survey.retention }}%</div>
-          </div>
+            <div v-if="!survey.retention" data-cy="chart-data-cell" class="chart-data-cell"></div>
+              <div data-cy="chart-circle" 
+                class="chart-circle"
+                :style="{ color: framework.color }"
+                >{{ survey.retention }}%</div>
+            </div>
           
-          <div class="framework-name">{{ framework.name }}</div>
+          <div data-cy="chart-data-cell">{{ framework.name }}</div>
         </div>
       </div>
     </div>
   </div>
+
+
+
 </template>
 
-<style>
+<style scoped>
 
 .container {
   display: flex;
@@ -115,7 +102,7 @@
 .years div {
   display: flex;
   padding-left: 15.5px;
-  padding-right: 8.5px;
+  padding-right: 6.5px;
   color: white; 
 }
 
@@ -139,13 +126,14 @@
   font-weight: bold;
   margin-top: 10px;
   font-size: 12px;
-  width: 50px;
+  width: 53px;
 }
 
 .ring-row {
   display: flex;
   justify-content: center; 
   margin-top: 5px; /* Avstånd mellan ringarna i varje rad */
+  position: relative; /* Lägg till position: relative för att positionera pseudoelementen */
   
 }
 
@@ -161,6 +149,32 @@
     font-size: 11px;
     margin-right: 7px;
     margin-left: 7px;
+    position: relative; /* Lägg till position: relative för att positionera pseudoelementen */
+
+      /* Skapa linje till vänster (för alla utom den första ringen) */
+  &::before {
+    content: '';
+    position: absolute;
+    height: 1px; /* Höjden på linjen */
+    width: 7px; /* Bredden på linjen */
+    background-color: white; /* Färg på linjen */
+    left: -12px; /* Justera vänsterposition för linjen */
+    top: 50%; /* Centrera linjen vertikalt */
+    transform: translateY(-50%); /* Centrera linjen vertikalt */
+  }
+  
+  /* Skapa linje till höger (för alla utom den sista ringen) */
+  &::after {
+    content: '';
+    position: absolute;
+    height: 1px; /* Höjden på linjen */
+    width: 7px; /* Bredden på linjen */
+    background-color: white; /* Färg på linjen */
+    right: -12px; /* Justera högerposition för linjen */
+    top: 50%; /* Centrera linjen vertikalt */
+    transform: translateY(-50%); /* Centrera linjen vertikalt */
+  }
+
 }
 
 .chart-circle {
@@ -182,4 +196,7 @@ export default {
   },
   // ...
 };
+
+
+
 </script>

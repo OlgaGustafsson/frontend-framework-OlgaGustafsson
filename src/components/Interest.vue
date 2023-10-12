@@ -39,37 +39,36 @@ export default {
 
 
 <template>
-  <div class="container">
+  <div class="container" data-cy="chart">
     <div class="years">
-      <div v-for="(year, index) in years" :key="index" class="year-cell">{{ year }}</div>
+      <div v-for="(year, index) in years" :key="index" data-cy="chart-header-cell">{{ year }}</div>
     </div>
 
     <div class="chart">
       <div v-for="framework in frameworks" 
-      :key="framework.name" 
-      class="framework"
-      :style="{ color: framework.color }"
-      >
-        <!--<div class="framework-name">{{ framework.name }}</div>-->
+        :key="framework.name" 
+        class="framework"
+        :style="{ color: framework.color }"
+        >
+        
         <div class="ring-row">
-        <div class="framework-name">{{ framework.name }}</div>
+        <div data-cy="chart-data-cell">{{ framework.name }}</div>
+
+
           <div data-cy="chart-data-cell"
             v-for="(survey, index) in framework.surveys"
             :key="index"
             class="ring-circle"
             :style="{ backgroundColor: black, borderColor: framework.color }"
           >
-          <div v-if="framework.name === 'React' && index === 0"
-             :style="{ color: 'white' }"
-          >React</div>
-          <div v-else data-cy="chart-circle" 
+            <div v-if="!survey.retention || years.length <= 7" data-cy="chart-data-cell" class="chart-data-cell">Empty Cell</div>
+          <div data-cy="chart-circle" 
             class="chart-circle"
-            :style="{ color: 'white' }"
-            >{{ survey.interest }}%</div>
-            
-            <!--<div data-cy="chart-circle">{{ survey.interest }}% </div>-->
+            :style="{ color: framework.color }"
+            >{{ survey.interest || 'Empty' }}%</div>
           </div>
-          <div class="framework-name">{{ framework.name }}</div>
+          
+          <div data-cy="chart-data-cell">{{ framework.name }}</div>
         </div>
       </div>
     </div>
@@ -98,7 +97,7 @@ export default {
 .years div {
   display: flex;
   padding-left: 15.5px;
-  padding-right: 8.5px;
+  padding-right: 6.5px;
   color: white; 
 }
 
@@ -108,25 +107,26 @@ export default {
   align-items: center;
 }
 
-
 .framework {
   display: flex;
   flex-direction:  row-reverse;
   align-items: center;
   padding-top: 12px;
+  width: 450px;
 }
 
 .framework-name {
   font-weight: bold;
   margin-top: 10px;
   font-size: 12px;
-  width: 50px;
+  width: 53px;
 }
 
 .ring-row {
   display: flex;
   justify-content: center; /* Centrera ringarna horisontellt */
   margin-top: 5px; /* Avstånd mellan ringarna i varje rad */
+  position: relative;
 }
 
 .ring-circle {
@@ -141,6 +141,35 @@ export default {
   font-size: 11px;
   margin-right: 7px;
   margin-left: 7px;
+  position: relative; /* Lägg till position: relative för att positionera pseudoelementen */
+
+      /* Skapa linje till vänster (för alla utom den första ringen) */
+  &::before {
+    content: '';
+    position: absolute;
+    height: 1px; /* Höjden på linjen */
+    width: 7px; /* Bredden på linjen */
+    background-color: white; /* Färg på linjen */
+    left: -12px; /* Justera vänsterposition för linjen */
+    top: 50%; /* Centrera linjen vertikalt */
+    transform: translateY(-50%); /* Centrera linjen vertikalt */
+  }
+  
+  /* Skapa linje till höger (för alla utom den sista ringen) */
+  &::after {
+    content: '';
+    position: absolute;
+    height: 1px; /* Höjden på linjen */
+    width: 7px; /* Bredden på linjen */
+    background-color: white; /* Färg på linjen */
+    right: -12px; /* Justera högerposition för linjen */
+    top: 50%; /* Centrera linjen vertikalt */
+    transform: translateY(-50%); /* Centrera linjen vertikalt */
+  }
+
+
+
+
 }
 
 </style>
