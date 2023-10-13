@@ -12,11 +12,4 @@ defineProps({
     </header>   
 </template>
 
-<!--<style scoped>
-.my-header {
-  background-color: black;
-  color: white;
-  margin: 0;
-  height: 50px;
-}
-</style>-->
+

@@ -116,12 +116,12 @@ export default {
       const text = this.ringTexts[i];
       
       //const dataCyValue = `chart-circle-${text.replace('%', '')}`;
-      //const dataCyValue = 'chart-circle';
-      //canvas.setAttribute(`data-cy-${i}`, dataCyValue); // detta attribut kommer att vara på canvas-elementet
+      const dataCyValue = 'chart-circle';
+      canvas.setAttribute(`data-cy-${i}`, dataCyValue); // detta attribut kommer att vara på canvas-elementet
 
     // Skapa en ny div-element för varje cell
-    const cell = document.createElement('div');
-    cell.setAttribute('data-cy', 'chart-circle'); // sätt önskat värde här
+    //const cell = document.createElement('div');
+    //cell.setAttribute('data-cy', 'chart-circle'); // sätt värde här
    
 
 
@@ -145,7 +145,7 @@ export default {
       
       // lägg till cellen i DOM
       //this.$refs.canvas.parentElement.appendChild(cell);
-      this.$el.querySelector('[data-cy="chart-data-cell"]').appendChild(cell);
+      //this.$el.querySelector('[data-cy="chart-data-cell"]').appendChild(cell);
      
 
     }

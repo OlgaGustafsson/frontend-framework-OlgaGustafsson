@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import Main from './components/Main.vue'
+//import Main from './components/Main.vue'
 import Retention from './components/retention.vue';
 import Interest from './components/interest.vue';
 import Usage from './components/usage.vue';

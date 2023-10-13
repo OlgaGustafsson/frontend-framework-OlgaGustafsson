@@ -93,8 +93,6 @@ export default {
         canvas.setAttribute(`data-cy-${i}`, dataCyValue); // detta attribut kommer att vara på canvas-elementet
 
 
-      
-      
       ctx.beginPath();
       ctx.arc(x, endY, ringRadius, 0, Math.PI * 2);
       ctx.fillStyle = 'black'; // fyll färgen i ringen

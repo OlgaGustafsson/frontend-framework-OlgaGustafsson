@@ -23,23 +23,3 @@ import { ref } from 'vue'
  
 </template>
 
-<!--<style scoped>
-/*
-.button-link {
-  display: inline-block;
-  padding: 10px 20px;
-  margin-left: 30px;
-  background-color: gray;
-  color: white;
-  text-decoration: none;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.button-link:hover {
-  background-color: green;
-}
-*/
-</style>-->
