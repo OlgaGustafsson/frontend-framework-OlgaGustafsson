@@ -1,4 +1,4 @@
-# Skollprojekt "Frontendramverk"
+# Skolprojekt "Frontendramverk"
 
 Syftet med projektet var att lära sig ett nytt ramverk man har inte jobbat med förut.
 
